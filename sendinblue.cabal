@@ -1,5 +1,5 @@
 name:           sendinblue
-version:        0.1.0.0
+version:        0.1.1.0
 synopsis:       Auto-generated sendinblue API Client
 description:    .
                 Client library for calling the SendinBlue API API based on http-client.
