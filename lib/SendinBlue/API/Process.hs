@@ -66,7 +66,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getProcess0 
+getProcess0
   :: ProcessId -- ^ "processId" -  Id of the process
   -> SendinBlueRequest GetProcess0 MimeNoContent GetProcess MimeJSON
 getProcess0 (ProcessId processId) =
@@ -86,7 +86,7 @@ instance Produces GetProcess0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getProcesses0 
+getProcesses0
   :: SendinBlueRequest GetProcesses0 MimeNoContent GetProcesses MimeJSON
 getProcesses0 =
   _mkRequest "GET" ["/processes"]

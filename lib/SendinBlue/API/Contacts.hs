@@ -66,7 +66,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-addContactToList0 
+addContactToList0
   :: (Consumes AddContactToList0 MimeJSON, MimeRender MimeJSON AddContactToList)
   => AddContactToList -- ^ "contactEmails" -  Emails addresses of the contacts
   -> ListId -- ^ "listId" -  Id of the list
@@ -96,14 +96,12 @@ instance Produces AddContactToList0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-createAttribute0 
+createAttribute0
   :: (Consumes CreateAttribute0 MimeJSON, MimeRender MimeJSON CreateAttribute)
   => CreateAttribute -- ^ "createAttribute" -  Values to create an attribute
   -> AttributeCategory2 -- ^ "attributeCategory" -  Category of the attribute
   -> AttributeName -- ^ "attributeName" -  Name of the attribute
-  -> SendinBlueRequest CreateAttribute0 MimeJSON res MimeJSON
+  -> SendinBlueRequest CreateAttribute0 MimeJSON NoContent MimeNoContent
 createAttribute0 createAttribute (AttributeCategory2 attributeCategory) (AttributeName attributeName) =
   _mkRequest "POST" ["/contacts/attributes/",toPath attributeCategory,"/",toPath attributeName]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -117,8 +115,7 @@ instance HasBodyParam CreateAttribute0 CreateAttribute
 -- | @application/json@
 instance Consumes CreateAttribute0 MimeJSON
 
--- | @application/json@
-instance Produces CreateAttribute0 MimeJSON
+instance Produces CreateAttribute0 MimeNoContent
 
 
 -- *** createContact0
@@ -129,7 +126,7 @@ instance Produces CreateAttribute0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-createContact0 
+createContact0
   :: (Consumes CreateContact0 MimeJSON, MimeRender MimeJSON CreateContact)
   => CreateContact -- ^ "createContact" -  Values to create a contact
   -> SendinBlueRequest CreateContact0 MimeJSON CreateUpdateContactModel MimeJSON
@@ -158,12 +155,10 @@ instance Produces CreateContact0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-createDoiContact0 
+createDoiContact0
   :: (Consumes CreateDoiContact0 MimeJSON, MimeRender MimeJSON CreateDoiContact)
   => CreateDoiContact -- ^ "createDoiContact" -  Values to create the Double opt-in (DOI) contact
-  -> SendinBlueRequest CreateDoiContact0 MimeJSON res MimeJSON
+  -> SendinBlueRequest CreateDoiContact0 MimeJSON NoContent MimeNoContent
 createDoiContact0 createDoiContact =
   _mkRequest "POST" ["/contacts/doubleOptinConfirmation"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -177,8 +172,7 @@ instance HasBodyParam CreateDoiContact0 CreateDoiContact
 -- | @application/json@
 instance Consumes CreateDoiContact0 MimeJSON
 
--- | @application/json@
-instance Produces CreateDoiContact0 MimeJSON
+instance Produces CreateDoiContact0 MimeNoContent
 
 
 -- *** createFolder
@@ -189,7 +183,7 @@ instance Produces CreateDoiContact0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-createFolder 
+createFolder
   :: (Consumes CreateFolder MimeJSON, MimeRender MimeJSON CreateUpdateFolder)
   => CreateUpdateFolder -- ^ "createFolder" -  Name of the folder
   -> SendinBlueRequest CreateFolder MimeJSON CreateModel MimeJSON
@@ -218,7 +212,7 @@ instance Produces CreateFolder MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-createList0 
+createList0
   :: (Consumes CreateList0 MimeJSON, MimeRender MimeJSON CreateList)
   => CreateList -- ^ "createList" -  Values to create a list
   -> SendinBlueRequest CreateList0 MimeJSON CreateModel MimeJSON
@@ -247,19 +241,16 @@ instance Produces CreateList0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteAttribute 
+deleteAttribute
   :: AttributeCategory2 -- ^ "attributeCategory" -  Category of the attribute
   -> AttributeName -- ^ "attributeName" -  Name of the existing attribute
-  -> SendinBlueRequest DeleteAttribute MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteAttribute MimeNoContent NoContent MimeNoContent
 deleteAttribute (AttributeCategory2 attributeCategory) (AttributeName attributeName) =
   _mkRequest "DELETE" ["/contacts/attributes/",toPath attributeCategory,"/",toPath attributeName]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteAttribute  
--- | @application/json@
-instance Produces DeleteAttribute MimeJSON
+instance Produces DeleteAttribute MimeNoContent
 
 
 -- *** deleteContact
@@ -270,18 +261,15 @@ instance Produces DeleteAttribute MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteContact 
+deleteContact
   :: Email -- ^ "email" -  Email (urlencoded) of the contact
-  -> SendinBlueRequest DeleteContact MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteContact MimeNoContent NoContent MimeNoContent
 deleteContact (Email email) =
   _mkRequest "DELETE" ["/contacts/",toPath email]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteContact  
--- | @application/json@
-instance Produces DeleteContact MimeJSON
+instance Produces DeleteContact MimeNoContent
 
 
 -- *** deleteFolder
@@ -292,18 +280,15 @@ instance Produces DeleteContact MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteFolder 
+deleteFolder
   :: FolderId -- ^ "folderId" -  Id of the folder
-  -> SendinBlueRequest DeleteFolder MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteFolder MimeNoContent NoContent MimeNoContent
 deleteFolder (FolderId folderId) =
   _mkRequest "DELETE" ["/contacts/folders/",toPath folderId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteFolder  
--- | @application/json@
-instance Produces DeleteFolder MimeJSON
+instance Produces DeleteFolder MimeNoContent
 
 
 -- *** deleteList
@@ -314,18 +299,15 @@ instance Produces DeleteFolder MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteList 
+deleteList
   :: ListId -- ^ "listId" -  Id of the list
-  -> SendinBlueRequest DeleteList MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteList MimeNoContent NoContent MimeNoContent
 deleteList (ListId listId) =
   _mkRequest "DELETE" ["/contacts/lists/",toPath listId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteList  
--- | @application/json@
-instance Produces DeleteList MimeJSON
+instance Produces DeleteList MimeNoContent
 
 
 -- *** getAttributes0
@@ -336,7 +318,7 @@ instance Produces DeleteList MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getAttributes0 
+getAttributes0
   :: SendinBlueRequest GetAttributes0 MimeNoContent GetAttributes MimeJSON
 getAttributes0 =
   _mkRequest "GET" ["/contacts/attributes"]
@@ -355,7 +337,7 @@ instance Produces GetAttributes0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getContactInfo 
+getContactInfo
   :: Email -- ^ "email" -  Email (urlencoded) of the contact OR its SMS attribute value
   -> SendinBlueRequest GetContactInfo MimeNoContent GetExtendedContactDetails MimeJSON
 getContactInfo (Email email) =
@@ -375,7 +357,7 @@ instance Produces GetContactInfo MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getContactStats 
+getContactStats
   :: Email -- ^ "email" -  Email address (urlencoded) of the contact
   -> SendinBlueRequest GetContactStats MimeNoContent GetContactCampaignStats MimeJSON
 getContactStats (Email email) =
@@ -405,7 +387,7 @@ instance Produces GetContactStats MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getContacts0 
+getContacts0
   :: SendinBlueRequest GetContacts0 MimeNoContent GetContacts MimeJSON
 getContacts0 =
   _mkRequest "GET" ["/contacts"]
@@ -444,7 +426,7 @@ instance Produces GetContacts0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getContactsFromList 
+getContactsFromList
   :: ListId -- ^ "listId" -  Id of the list
   -> SendinBlueRequest GetContactsFromList MimeNoContent GetContacts MimeJSON
 getContactsFromList (ListId listId) =
@@ -484,7 +466,7 @@ instance Produces GetContactsFromList MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getFolder0 
+getFolder0
   :: FolderId -- ^ "folderId" -  id of the folder
   -> SendinBlueRequest GetFolder0 MimeNoContent GetFolder MimeJSON
 getFolder0 (FolderId folderId) =
@@ -504,7 +486,7 @@ instance Produces GetFolder0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getFolderLists0 
+getFolderLists0
   :: FolderId -- ^ "folderId" -  Id of the folder
   -> SendinBlueRequest GetFolderLists0 MimeNoContent GetFolderLists MimeJSON
 getFolderLists0 (FolderId folderId) =
@@ -539,7 +521,7 @@ instance Produces GetFolderLists0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getFolders0 
+getFolders0
   :: Limit -- ^ "limit" -  Number of documents per page
   -> Offset -- ^ "offset" -  Index of the first document of the page
   -> SendinBlueRequest GetFolders0 MimeNoContent GetFolders MimeJSON
@@ -567,7 +549,7 @@ instance Produces GetFolders0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getList0 
+getList0
   :: ListId -- ^ "listId" -  Id of the list
   -> SendinBlueRequest GetList0 MimeNoContent GetExtendedList MimeJSON
 getList0 (ListId listId) =
@@ -587,7 +569,7 @@ instance Produces GetList0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getLists0 
+getLists0
   :: SendinBlueRequest GetLists0 MimeNoContent GetLists MimeJSON
 getLists0 =
   _mkRequest "GET" ["/contacts/lists"]
@@ -623,7 +605,7 @@ instance Produces GetLists0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-importContacts 
+importContacts
   :: (Consumes ImportContacts MimeJSON, MimeRender MimeJSON RequestContactImport)
   => RequestContactImport -- ^ "requestContactImport" -  Values to import contacts in Sendinblue. To know more about the expected format, please have a look at ``https://help.sendinblue.com/hc/en-us/articles/209499265-Build-contacts-lists-for-your-email-marketing-campaigns``
   -> SendinBlueRequest ImportContacts MimeJSON CreatedProcessId MimeJSON
@@ -652,7 +634,7 @@ instance Produces ImportContacts MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-removeContactFromList0 
+removeContactFromList0
   :: (Consumes RemoveContactFromList0 MimeJSON, MimeRender MimeJSON RemoveContactFromList)
   => RemoveContactFromList -- ^ "contactEmails" -  Emails adresses of the contact
   -> ListId -- ^ "listId" -  Id of the list
@@ -684,7 +666,7 @@ instance Produces RemoveContactFromList0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-requestContactExport0 
+requestContactExport0
   :: (Consumes RequestContactExport0 MimeJSON, MimeRender MimeJSON RequestContactExport)
   => RequestContactExport -- ^ "requestContactExport" -  Values to request a contact export
   -> SendinBlueRequest RequestContactExport0 MimeJSON CreatedProcessId MimeJSON
@@ -713,14 +695,12 @@ instance Produces RequestContactExport0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateAttribute0 
+updateAttribute0
   :: (Consumes UpdateAttribute0 MimeJSON, MimeRender MimeJSON UpdateAttribute)
   => UpdateAttribute -- ^ "updateAttribute" -  Values to update an attribute
   -> AttributeCategory -- ^ "attributeCategory" -  Category of the attribute
   -> AttributeName -- ^ "attributeName" -  Name of the existing attribute
-  -> SendinBlueRequest UpdateAttribute0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateAttribute0 MimeJSON NoContent MimeNoContent
 updateAttribute0 updateAttribute (AttributeCategory attributeCategory) (AttributeName attributeName) =
   _mkRequest "PUT" ["/contacts/attributes/",toPath attributeCategory,"/",toPath attributeName]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -734,8 +714,7 @@ instance HasBodyParam UpdateAttribute0 UpdateAttribute
 -- | @application/json@
 instance Consumes UpdateAttribute0 MimeJSON
 
--- | @application/json@
-instance Produces UpdateAttribute0 MimeJSON
+instance Produces UpdateAttribute0 MimeNoContent
 
 
 -- *** updateContact0
@@ -746,13 +725,11 @@ instance Produces UpdateAttribute0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateContact0 
+updateContact0
   :: (Consumes UpdateContact0 MimeJSON, MimeRender MimeJSON UpdateContact)
   => UpdateContact -- ^ "updateContact" -  Values to update a contact
   -> Email -- ^ "email" -  Email (urlencoded) of the contact
-  -> SendinBlueRequest UpdateContact0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateContact0 MimeJSON NoContent MimeNoContent
 updateContact0 updateContact (Email email) =
   _mkRequest "PUT" ["/contacts/",toPath email]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -766,8 +743,7 @@ instance HasBodyParam UpdateContact0 UpdateContact
 -- | @application/json@
 instance Consumes UpdateContact0 MimeJSON
 
--- | @application/json@
-instance Produces UpdateContact0 MimeJSON
+instance Produces UpdateContact0 MimeNoContent
 
 
 -- *** updateFolder
@@ -778,13 +754,11 @@ instance Produces UpdateContact0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateFolder 
+updateFolder
   :: (Consumes UpdateFolder MimeJSON, MimeRender MimeJSON CreateUpdateFolder)
   => CreateUpdateFolder -- ^ "updateFolder" -  Name of the folder
   -> FolderId -- ^ "folderId" -  Id of the folder
-  -> SendinBlueRequest UpdateFolder MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateFolder MimeJSON NoContent MimeNoContent
 updateFolder updateFolder (FolderId folderId) =
   _mkRequest "PUT" ["/contacts/folders/",toPath folderId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -798,8 +772,7 @@ instance HasBodyParam UpdateFolder CreateUpdateFolder
 -- | @application/json@
 instance Consumes UpdateFolder MimeJSON
 
--- | @application/json@
-instance Produces UpdateFolder MimeJSON
+instance Produces UpdateFolder MimeNoContent
 
 
 -- *** updateList0
@@ -810,13 +783,11 @@ instance Produces UpdateFolder MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateList0 
+updateList0
   :: (Consumes UpdateList0 MimeJSON, MimeRender MimeJSON UpdateList)
   => UpdateList -- ^ "updateList" -  Values to update a list
   -> ListId -- ^ "listId" -  Id of the list
-  -> SendinBlueRequest UpdateList0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateList0 MimeJSON NoContent MimeNoContent
 updateList0 updateList (ListId listId) =
   _mkRequest "PUT" ["/contacts/lists/",toPath listId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -830,6 +801,5 @@ instance HasBodyParam UpdateList0 UpdateList
 -- | @application/json@
 instance Consumes UpdateList0 MimeJSON
 
--- | @application/json@
-instance Produces UpdateList0 MimeJSON
+instance Produces UpdateList0 MimeNoContent
 

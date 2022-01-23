@@ -66,7 +66,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-createFolder0 
+createFolder0
   :: (Consumes CreateFolder0 MimeJSON, MimeRender MimeJSON CreateUpdateFolder)
   => CreateUpdateFolder -- ^ "createFolder" -  Name of the folder
   -> SendinBlueRequest CreateFolder0 MimeJSON CreateModel MimeJSON
@@ -95,18 +95,15 @@ instance Produces CreateFolder0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteFolder0 
+deleteFolder0
   :: FolderId -- ^ "folderId" -  Id of the folder
-  -> SendinBlueRequest DeleteFolder0 MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteFolder0 MimeNoContent NoContent MimeNoContent
 deleteFolder0 (FolderId folderId) =
   _mkRequest "DELETE" ["/contacts/folders/",toPath folderId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteFolder0  
--- | @application/json@
-instance Produces DeleteFolder0 MimeJSON
+instance Produces DeleteFolder0 MimeNoContent
 
 
 -- *** getFolder1
@@ -117,7 +114,7 @@ instance Produces DeleteFolder0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getFolder1 
+getFolder1
   :: FolderId -- ^ "folderId" -  id of the folder
   -> SendinBlueRequest GetFolder1 MimeNoContent GetFolder MimeJSON
 getFolder1 (FolderId folderId) =
@@ -137,7 +134,7 @@ instance Produces GetFolder1 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getFolderLists1 
+getFolderLists1
   :: FolderId -- ^ "folderId" -  Id of the folder
   -> SendinBlueRequest GetFolderLists1 MimeNoContent GetFolderLists MimeJSON
 getFolderLists1 (FolderId folderId) =
@@ -172,7 +169,7 @@ instance Produces GetFolderLists1 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getFolders1 
+getFolders1
   :: Limit -- ^ "limit" -  Number of documents per page
   -> Offset -- ^ "offset" -  Index of the first document of the page
   -> SendinBlueRequest GetFolders1 MimeNoContent GetFolders MimeJSON
@@ -200,13 +197,11 @@ instance Produces GetFolders1 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateFolder0 
+updateFolder0
   :: (Consumes UpdateFolder0 MimeJSON, MimeRender MimeJSON CreateUpdateFolder)
   => CreateUpdateFolder -- ^ "updateFolder" -  Name of the folder
   -> FolderId -- ^ "folderId" -  Id of the folder
-  -> SendinBlueRequest UpdateFolder0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateFolder0 MimeJSON NoContent MimeNoContent
 updateFolder0 updateFolder (FolderId folderId) =
   _mkRequest "PUT" ["/contacts/folders/",toPath folderId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -220,6 +215,5 @@ instance HasBodyParam UpdateFolder0 CreateUpdateFolder
 -- | @application/json@
 instance Consumes UpdateFolder0 MimeJSON
 
--- | @application/json@
-instance Produces UpdateFolder0 MimeJSON
+instance Produces UpdateFolder0 MimeNoContent
 

@@ -66,7 +66,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getSmsEvents 
+getSmsEvents
   :: SendinBlueRequest GetSmsEvents MimeNoContent GetSmsEventReport MimeJSON
 getSmsEvents =
   _mkRequest "GET" ["/transactionalSMS/statistics/events"]
@@ -130,7 +130,7 @@ instance Produces GetSmsEvents MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getTransacAggregatedSmsReport0 
+getTransacAggregatedSmsReport0
   :: SendinBlueRequest GetTransacAggregatedSmsReport0 MimeNoContent GetTransacAggregatedSmsReport MimeJSON
 getTransacAggregatedSmsReport0 =
   _mkRequest "GET" ["/transactionalSMS/statistics/aggregatedReport"]
@@ -169,7 +169,7 @@ instance Produces GetTransacAggregatedSmsReport0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getTransacSmsReport0 
+getTransacSmsReport0
   :: SendinBlueRequest GetTransacSmsReport0 MimeNoContent GetTransacSmsReport MimeJSON
 getTransacSmsReport0 =
   _mkRequest "GET" ["/transactionalSMS/statistics/reports"]
@@ -213,7 +213,7 @@ instance Produces GetTransacSmsReport0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-sendTransacSms0 
+sendTransacSms0
   :: (Consumes SendTransacSms0 MimeJSON, MimeRender MimeJSON SendTransacSms)
   => SendTransacSms -- ^ "sendTransacSms" -  Values to send a transactional SMS
   -> SendinBlueRequest SendTransacSms0 MimeJSON SendSms MimeJSON

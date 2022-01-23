@@ -66,14 +66,12 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-createAttribute1 
+createAttribute1
   :: (Consumes CreateAttribute1 MimeJSON, MimeRender MimeJSON CreateAttribute)
   => CreateAttribute -- ^ "createAttribute" -  Values to create an attribute
   -> AttributeCategory2 -- ^ "attributeCategory" -  Category of the attribute
   -> AttributeName -- ^ "attributeName" -  Name of the attribute
-  -> SendinBlueRequest CreateAttribute1 MimeJSON res MimeJSON
+  -> SendinBlueRequest CreateAttribute1 MimeJSON NoContent MimeNoContent
 createAttribute1 createAttribute (AttributeCategory2 attributeCategory) (AttributeName attributeName) =
   _mkRequest "POST" ["/contacts/attributes/",toPath attributeCategory,"/",toPath attributeName]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -87,8 +85,7 @@ instance HasBodyParam CreateAttribute1 CreateAttribute
 -- | @application/json@
 instance Consumes CreateAttribute1 MimeJSON
 
--- | @application/json@
-instance Produces CreateAttribute1 MimeJSON
+instance Produces CreateAttribute1 MimeNoContent
 
 
 -- *** deleteAttribute0
@@ -99,19 +96,16 @@ instance Produces CreateAttribute1 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteAttribute0 
+deleteAttribute0
   :: AttributeCategory2 -- ^ "attributeCategory" -  Category of the attribute
   -> AttributeName -- ^ "attributeName" -  Name of the existing attribute
-  -> SendinBlueRequest DeleteAttribute0 MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteAttribute0 MimeNoContent NoContent MimeNoContent
 deleteAttribute0 (AttributeCategory2 attributeCategory) (AttributeName attributeName) =
   _mkRequest "DELETE" ["/contacts/attributes/",toPath attributeCategory,"/",toPath attributeName]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteAttribute0  
--- | @application/json@
-instance Produces DeleteAttribute0 MimeJSON
+instance Produces DeleteAttribute0 MimeNoContent
 
 
 -- *** getAttributes1
@@ -122,7 +116,7 @@ instance Produces DeleteAttribute0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getAttributes1 
+getAttributes1
   :: SendinBlueRequest GetAttributes1 MimeNoContent GetAttributes MimeJSON
 getAttributes1 =
   _mkRequest "GET" ["/contacts/attributes"]
@@ -141,14 +135,12 @@ instance Produces GetAttributes1 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateAttribute1 
+updateAttribute1
   :: (Consumes UpdateAttribute1 MimeJSON, MimeRender MimeJSON UpdateAttribute)
   => UpdateAttribute -- ^ "updateAttribute" -  Values to update an attribute
   -> AttributeCategory -- ^ "attributeCategory" -  Category of the attribute
   -> AttributeName -- ^ "attributeName" -  Name of the existing attribute
-  -> SendinBlueRequest UpdateAttribute1 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateAttribute1 MimeJSON NoContent MimeNoContent
 updateAttribute1 updateAttribute (AttributeCategory attributeCategory) (AttributeName attributeName) =
   _mkRequest "PUT" ["/contacts/attributes/",toPath attributeCategory,"/",toPath attributeName]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -162,6 +154,5 @@ instance HasBodyParam UpdateAttribute1 UpdateAttribute
 -- | @application/json@
 instance Consumes UpdateAttribute1 MimeJSON
 
--- | @application/json@
-instance Produces UpdateAttribute1 MimeJSON
+instance Produces UpdateAttribute1 MimeNoContent
 

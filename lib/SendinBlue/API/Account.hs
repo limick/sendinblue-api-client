@@ -66,7 +66,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getAccount0 
+getAccount0
   :: SendinBlueRequest GetAccount0 MimeNoContent GetAccount MimeJSON
 getAccount0 =
   _mkRequest "GET" ["/account"]

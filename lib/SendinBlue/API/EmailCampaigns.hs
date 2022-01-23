@@ -66,7 +66,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-createEmailCampaign0 
+createEmailCampaign0
   :: (Consumes CreateEmailCampaign0 MimeJSON, MimeRender MimeJSON CreateEmailCampaign)
   => CreateEmailCampaign -- ^ "emailCampaigns" -  Values to create a campaign
   -> SendinBlueRequest CreateEmailCampaign0 MimeJSON CreateModel MimeJSON
@@ -95,18 +95,15 @@ instance Produces CreateEmailCampaign0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteEmailCampaign 
+deleteEmailCampaign
   :: CampaignId -- ^ "campaignId" -  id of the campaign
-  -> SendinBlueRequest DeleteEmailCampaign MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteEmailCampaign MimeNoContent NoContent MimeNoContent
 deleteEmailCampaign (CampaignId campaignId) =
   _mkRequest "DELETE" ["/emailCampaigns/",toPath campaignId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteEmailCampaign  
--- | @application/json@
-instance Produces DeleteEmailCampaign MimeJSON
+instance Produces DeleteEmailCampaign MimeNoContent
 
 
 -- *** emailExportRecipients0
@@ -117,7 +114,7 @@ instance Produces DeleteEmailCampaign MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-emailExportRecipients0 
+emailExportRecipients0
   :: (Consumes EmailExportRecipients0 MimeJSON)
   => CampaignId -- ^ "campaignId" -  Id of the campaign
   -> SendinBlueRequest EmailExportRecipients0 MimeJSON CreatedProcessId MimeJSON
@@ -147,7 +144,7 @@ instance Produces EmailExportRecipients0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getAbTestCampaignResult 
+getAbTestCampaignResult
   :: CampaignId -- ^ "campaignId" -  Id of the A/B test campaign
   -> SendinBlueRequest GetAbTestCampaignResult MimeNoContent AbTestCampaignResult MimeJSON
 getAbTestCampaignResult (CampaignId campaignId) =
@@ -167,7 +164,7 @@ instance Produces GetAbTestCampaignResult MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getEmailCampaign0 
+getEmailCampaign0
   :: CampaignId -- ^ "campaignId" -  Id of the campaign
   -> SendinBlueRequest GetEmailCampaign0 MimeNoContent GetEmailCampaign MimeJSON
 getEmailCampaign0 (CampaignId campaignId) =
@@ -187,7 +184,7 @@ instance Produces GetEmailCampaign0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getEmailCampaigns0 
+getEmailCampaigns0
   :: Accept accept -- ^ request accept ('MimeType')
   -> SendinBlueRequest GetEmailCampaigns0 MimeNoContent GetEmailCampaigns accept
 getEmailCampaigns0  _ =
@@ -241,7 +238,7 @@ instance Produces GetEmailCampaigns0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getSharedTemplateUrl0 
+getSharedTemplateUrl0
   :: CampaignId -- ^ "campaignId" -  Id of the campaign or template
   -> SendinBlueRequest GetSharedTemplateUrl0 MimeNoContent GetSharedTemplateUrl MimeJSON
 getSharedTemplateUrl0 (CampaignId campaignId) =
@@ -261,18 +258,15 @@ instance Produces GetSharedTemplateUrl0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-sendEmailCampaignNow 
+sendEmailCampaignNow
   :: CampaignId -- ^ "campaignId" -  Id of the campaign
-  -> SendinBlueRequest SendEmailCampaignNow MimeNoContent res MimeJSON
+  -> SendinBlueRequest SendEmailCampaignNow MimeNoContent NoContent MimeNoContent
 sendEmailCampaignNow (CampaignId campaignId) =
   _mkRequest "POST" ["/emailCampaigns/",toPath campaignId,"/sendNow"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data SendEmailCampaignNow  
--- | @application/json@
-instance Produces SendEmailCampaignNow MimeJSON
+instance Produces SendEmailCampaignNow MimeNoContent
 
 
 -- *** sendReport0
@@ -285,13 +279,11 @@ instance Produces SendEmailCampaignNow MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-sendReport0 
+sendReport0
   :: (Consumes SendReport0 MimeJSON, MimeRender MimeJSON SendReport)
   => SendReport -- ^ "sendReport" -  Values for send a report
   -> CampaignId -- ^ "campaignId" -  Id of the campaign
-  -> SendinBlueRequest SendReport0 MimeJSON res MimeJSON
+  -> SendinBlueRequest SendReport0 MimeJSON NoContent MimeNoContent
 sendReport0 sendReport (CampaignId campaignId) =
   _mkRequest "POST" ["/emailCampaigns/",toPath campaignId,"/sendReport"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -305,8 +297,7 @@ instance HasBodyParam SendReport0 SendReport
 -- | @application/json@
 instance Consumes SendReport0 MimeJSON
 
--- | @application/json@
-instance Produces SendReport0 MimeJSON
+instance Produces SendReport0 MimeNoContent
 
 
 -- *** sendTestEmail0
@@ -317,13 +308,11 @@ instance Produces SendReport0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-sendTestEmail0 
+sendTestEmail0
   :: (Consumes SendTestEmail0 MimeJSON, MimeRender MimeJSON SendTestEmail)
   => SendTestEmail -- ^ "emailTo"
   -> CampaignId -- ^ "campaignId" -  Id of the campaign
-  -> SendinBlueRequest SendTestEmail0 MimeJSON res MimeJSON
+  -> SendinBlueRequest SendTestEmail0 MimeJSON NoContent MimeNoContent
 sendTestEmail0 emailTo (CampaignId campaignId) =
   _mkRequest "POST" ["/emailCampaigns/",toPath campaignId,"/sendTest"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -335,8 +324,7 @@ instance HasBodyParam SendTestEmail0 SendTestEmail
 -- | @application/json@
 instance Consumes SendTestEmail0 MimeJSON
 
--- | @application/json@
-instance Produces SendTestEmail0 MimeJSON
+instance Produces SendTestEmail0 MimeNoContent
 
 
 -- *** updateCampaignStatus0
@@ -347,13 +335,11 @@ instance Produces SendTestEmail0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateCampaignStatus0 
+updateCampaignStatus0
   :: (Consumes UpdateCampaignStatus0 MimeJSON, MimeRender MimeJSON UpdateCampaignStatus)
   => UpdateCampaignStatus -- ^ "status" -  Status of the campaign
   -> CampaignId -- ^ "campaignId" -  Id of the campaign
-  -> SendinBlueRequest UpdateCampaignStatus0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateCampaignStatus0 MimeJSON NoContent MimeNoContent
 updateCampaignStatus0 status (CampaignId campaignId) =
   _mkRequest "PUT" ["/emailCampaigns/",toPath campaignId,"/status"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -367,8 +353,7 @@ instance HasBodyParam UpdateCampaignStatus0 UpdateCampaignStatus
 -- | @application/json@
 instance Consumes UpdateCampaignStatus0 MimeJSON
 
--- | @application/json@
-instance Produces UpdateCampaignStatus0 MimeJSON
+instance Produces UpdateCampaignStatus0 MimeNoContent
 
 
 -- *** updateEmailCampaign0
@@ -379,13 +364,11 @@ instance Produces UpdateCampaignStatus0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateEmailCampaign0 
+updateEmailCampaign0
   :: (Consumes UpdateEmailCampaign0 MimeJSON, MimeRender MimeJSON UpdateEmailCampaign)
   => UpdateEmailCampaign -- ^ "emailCampaign" -  Values to update a campaign
   -> CampaignId -- ^ "campaignId" -  Id of the campaign
-  -> SendinBlueRequest UpdateEmailCampaign0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateEmailCampaign0 MimeJSON NoContent MimeNoContent
 updateEmailCampaign0 emailCampaign (CampaignId campaignId) =
   _mkRequest "PUT" ["/emailCampaigns/",toPath campaignId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -399,8 +382,7 @@ instance HasBodyParam UpdateEmailCampaign0 UpdateEmailCampaign
 -- | @application/json@
 instance Consumes UpdateEmailCampaign0 MimeJSON
 
--- | @application/json@
-instance Produces UpdateEmailCampaign0 MimeJSON
+instance Produces UpdateEmailCampaign0 MimeNoContent
 
 
 -- *** uploadImageToGallery0
@@ -411,12 +393,10 @@ instance Produces UpdateEmailCampaign0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-uploadImageToGallery0 
+uploadImageToGallery0
   :: (Consumes UploadImageToGallery0 MimeJSON, MimeRender MimeJSON UploadImageToGallery)
   => UploadImageToGallery -- ^ "uploadImage" -  Parameters to upload an image
-  -> SendinBlueRequest UploadImageToGallery0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UploadImageToGallery0 MimeJSON NoContent MimeNoContent
 uploadImageToGallery0 uploadImage =
   _mkRequest "POST" ["/emailCampaigns/images"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -430,6 +410,5 @@ instance HasBodyParam UploadImageToGallery0 UploadImageToGallery
 -- | @application/json@
 instance Consumes UploadImageToGallery0 MimeJSON
 
--- | @application/json@
-instance Produces UploadImageToGallery0 MimeJSON
+instance Produces UploadImageToGallery0 MimeNoContent
 

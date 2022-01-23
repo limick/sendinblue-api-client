@@ -66,7 +66,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-addCredits0 
+addCredits0
   :: (Consumes AddCredits0 MimeJSON, MimeRender MimeJSON AddCredits)
   => AddCredits -- ^ "addCredits" -  Values to post to add credit to a specific child account
   -> ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
@@ -96,13 +96,11 @@ instance Produces AddCredits0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-associateIpToChild 
+associateIpToChild
   :: (Consumes AssociateIpToChild MimeJSON, MimeRender MimeJSON ManageIp)
   => ManageIp -- ^ "ip" -  IP to associate
   -> ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
-  -> SendinBlueRequest AssociateIpToChild MimeJSON res MimeJSON
+  -> SendinBlueRequest AssociateIpToChild MimeJSON NoContent MimeNoContent
 associateIpToChild ip (ChildIdentifier childIdentifier) =
   _mkRequest "POST" ["/reseller/children/",toPath childIdentifier,"/ips/associate"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -116,8 +114,7 @@ instance HasBodyParam AssociateIpToChild ManageIp
 -- | @application/json@
 instance Consumes AssociateIpToChild MimeJSON
 
--- | @application/json@
-instance Produces AssociateIpToChild MimeJSON
+instance Produces AssociateIpToChild MimeNoContent
 
 
 -- *** createChildDomain
@@ -128,13 +125,11 @@ instance Produces AssociateIpToChild MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-createChildDomain 
+createChildDomain
   :: (Consumes CreateChildDomain MimeJSON, MimeRender MimeJSON AddChildDomain)
   => AddChildDomain -- ^ "addChildDomain" -  Sender domain to add for a specific child account. This will not be displayed to the parent account.
   -> ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
-  -> SendinBlueRequest CreateChildDomain MimeJSON res MimeJSON
+  -> SendinBlueRequest CreateChildDomain MimeJSON NoContent MimeNoContent
 createChildDomain addChildDomain (ChildIdentifier childIdentifier) =
   _mkRequest "POST" ["/reseller/children/",toPath childIdentifier,"/domains"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -148,8 +143,7 @@ instance HasBodyParam CreateChildDomain AddChildDomain
 -- | @application/json@
 instance Consumes CreateChildDomain MimeJSON
 
--- | @application/json@
-instance Produces CreateChildDomain MimeJSON
+instance Produces CreateChildDomain MimeNoContent
 
 
 -- *** createResellerChild
@@ -160,7 +154,7 @@ instance Produces CreateChildDomain MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-createResellerChild 
+createResellerChild
   :: (Consumes CreateResellerChild MimeJSON)
   => SendinBlueRequest CreateResellerChild MimeJSON CreateReseller MimeJSON
 createResellerChild =
@@ -187,19 +181,16 @@ instance Produces CreateResellerChild MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteChildDomain 
+deleteChildDomain
   :: ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
   -> DomainName -- ^ "domainName" -  Pass the existing domain that needs to be deleted
-  -> SendinBlueRequest DeleteChildDomain MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteChildDomain MimeNoContent NoContent MimeNoContent
 deleteChildDomain (ChildIdentifier childIdentifier) (DomainName domainName) =
   _mkRequest "DELETE" ["/reseller/children/",toPath childIdentifier,"/domains/",toPath domainName]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteChildDomain  
--- | @application/json@
-instance Produces DeleteChildDomain MimeJSON
+instance Produces DeleteChildDomain MimeNoContent
 
 
 -- *** deleteResellerChild
@@ -210,18 +201,15 @@ instance Produces DeleteChildDomain MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteResellerChild 
+deleteResellerChild
   :: ChildIdentifier -- ^ "childIdentifier" -  Either auth key or child id of reseller's child
-  -> SendinBlueRequest DeleteResellerChild MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteResellerChild MimeNoContent NoContent MimeNoContent
 deleteResellerChild (ChildIdentifier childIdentifier) =
   _mkRequest "DELETE" ["/reseller/children/",toPath childIdentifier]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteResellerChild  
--- | @application/json@
-instance Produces DeleteResellerChild MimeJSON
+instance Produces DeleteResellerChild MimeNoContent
 
 
 -- *** dissociateIpFromChild
@@ -232,13 +220,11 @@ instance Produces DeleteResellerChild MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-dissociateIpFromChild 
+dissociateIpFromChild
   :: (Consumes DissociateIpFromChild MimeJSON, MimeRender MimeJSON ManageIp)
   => ManageIp -- ^ "ip" -  IP to dissociate
   -> ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
-  -> SendinBlueRequest DissociateIpFromChild MimeJSON res MimeJSON
+  -> SendinBlueRequest DissociateIpFromChild MimeJSON NoContent MimeNoContent
 dissociateIpFromChild ip (ChildIdentifier childIdentifier) =
   _mkRequest "POST" ["/reseller/children/",toPath childIdentifier,"/ips/dissociate"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -252,8 +238,7 @@ instance HasBodyParam DissociateIpFromChild ManageIp
 -- | @application/json@
 instance Consumes DissociateIpFromChild MimeJSON
 
--- | @application/json@
-instance Produces DissociateIpFromChild MimeJSON
+instance Produces DissociateIpFromChild MimeNoContent
 
 
 -- *** getChildAccountCreationStatus0
@@ -264,7 +249,7 @@ instance Produces DissociateIpFromChild MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getChildAccountCreationStatus0 
+getChildAccountCreationStatus0
   :: ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
   -> SendinBlueRequest GetChildAccountCreationStatus0 MimeNoContent GetChildAccountCreationStatus MimeJSON
 getChildAccountCreationStatus0 (ChildIdentifier childIdentifier) =
@@ -284,7 +269,7 @@ instance Produces GetChildAccountCreationStatus0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getChildDomains 
+getChildDomains
   :: ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
   -> SendinBlueRequest GetChildDomains MimeNoContent [GetChildDomain] MimeJSON
 getChildDomains (ChildIdentifier childIdentifier) =
@@ -304,7 +289,7 @@ instance Produces GetChildDomains MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getChildInfo0 
+getChildInfo0
   :: ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
   -> SendinBlueRequest GetChildInfo0 MimeNoContent GetChildInfo MimeJSON
 getChildInfo0 (ChildIdentifier childIdentifier) =
@@ -324,7 +309,7 @@ instance Produces GetChildInfo0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getResellerChilds 
+getResellerChilds
   :: SendinBlueRequest GetResellerChilds MimeNoContent GetChildrenList MimeJSON
 getResellerChilds =
   _mkRequest "GET" ["/reseller/children"]
@@ -355,7 +340,7 @@ instance Produces GetResellerChilds MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getSsoToken0 
+getSsoToken0
   :: ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
   -> SendinBlueRequest GetSsoToken0 MimeNoContent GetSsoToken MimeJSON
 getSsoToken0 (ChildIdentifier childIdentifier) =
@@ -375,7 +360,7 @@ instance Produces GetSsoToken0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-removeCredits0 
+removeCredits0
   :: (Consumes RemoveCredits0 MimeJSON, MimeRender MimeJSON RemoveCredits)
   => RemoveCredits -- ^ "removeCredits" -  Values to post to remove email or SMS credits from a specific child account
   -> ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
@@ -405,13 +390,11 @@ instance Produces RemoveCredits0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateChildAccountStatus0 
+updateChildAccountStatus0
   :: (Consumes UpdateChildAccountStatus0 MimeJSON, MimeRender MimeJSON UpdateChildAccountStatus)
   => UpdateChildAccountStatus -- ^ "updateChildAccountStatus" -  values to update in child account status
   -> ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
-  -> SendinBlueRequest UpdateChildAccountStatus0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateChildAccountStatus0 MimeJSON NoContent MimeNoContent
 updateChildAccountStatus0 updateChildAccountStatus (ChildIdentifier childIdentifier) =
   _mkRequest "PUT" ["/reseller/children/",toPath childIdentifier,"/accountStatus"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -425,8 +408,7 @@ instance HasBodyParam UpdateChildAccountStatus0 UpdateChildAccountStatus
 -- | @application/json@
 instance Consumes UpdateChildAccountStatus0 MimeJSON
 
--- | @application/json@
-instance Produces UpdateChildAccountStatus0 MimeJSON
+instance Produces UpdateChildAccountStatus0 MimeNoContent
 
 
 -- *** updateChildDomain0
@@ -437,14 +419,12 @@ instance Produces UpdateChildAccountStatus0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateChildDomain0 
+updateChildDomain0
   :: (Consumes UpdateChildDomain0 MimeJSON, MimeRender MimeJSON UpdateChildDomain)
   => UpdateChildDomain -- ^ "updateChildDomain" -  value to update for sender domain
   -> ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
   -> DomainName -- ^ "domainName" -  Pass the existing domain that needs to be updated
-  -> SendinBlueRequest UpdateChildDomain0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateChildDomain0 MimeJSON NoContent MimeNoContent
 updateChildDomain0 updateChildDomain (ChildIdentifier childIdentifier) (DomainName domainName) =
   _mkRequest "PUT" ["/reseller/children/",toPath childIdentifier,"/domains/",toPath domainName]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -458,8 +438,7 @@ instance HasBodyParam UpdateChildDomain0 UpdateChildDomain
 -- | @application/json@
 instance Consumes UpdateChildDomain0 MimeJSON
 
--- | @application/json@
-instance Produces UpdateChildDomain0 MimeJSON
+instance Produces UpdateChildDomain0 MimeNoContent
 
 
 -- *** updateResellerChild
@@ -470,13 +449,11 @@ instance Produces UpdateChildDomain0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateResellerChild 
+updateResellerChild
   :: (Consumes UpdateResellerChild MimeJSON, MimeRender MimeJSON UpdateChild)
   => UpdateChild -- ^ "resellerChild" -  values to update in child profile
   -> ChildIdentifier -- ^ "childIdentifier" -  Either auth key or id of reseller's child
-  -> SendinBlueRequest UpdateResellerChild MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateResellerChild MimeJSON NoContent MimeNoContent
 updateResellerChild resellerChild (ChildIdentifier childIdentifier) =
   _mkRequest "PUT" ["/reseller/children/",toPath childIdentifier]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -490,6 +467,5 @@ instance HasBodyParam UpdateResellerChild UpdateChild
 -- | @application/json@
 instance Consumes UpdateResellerChild MimeJSON
 
--- | @application/json@
-instance Produces UpdateResellerChild MimeJSON
+instance Produces UpdateResellerChild MimeNoContent
 

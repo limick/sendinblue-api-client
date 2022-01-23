@@ -66,7 +66,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-createSmsCampaign0 
+createSmsCampaign0
   :: (Consumes CreateSmsCampaign0 MimeJSON, MimeRender MimeJSON CreateSmsCampaign)
   => CreateSmsCampaign -- ^ "createSmsCampaign" -  Values to create an SMS Campaign
   -> SendinBlueRequest CreateSmsCampaign0 MimeJSON CreateModel MimeJSON
@@ -95,18 +95,15 @@ instance Produces CreateSmsCampaign0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteSmsCampaign 
+deleteSmsCampaign
   :: CampaignId -- ^ "campaignId" -  id of the SMS campaign
-  -> SendinBlueRequest DeleteSmsCampaign MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteSmsCampaign MimeNoContent NoContent MimeNoContent
 deleteSmsCampaign (CampaignId campaignId) =
   _mkRequest "DELETE" ["/smsCampaigns/",toPath campaignId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteSmsCampaign  
--- | @application/json@
-instance Produces DeleteSmsCampaign MimeJSON
+instance Produces DeleteSmsCampaign MimeNoContent
 
 
 -- *** getSmsCampaign0
@@ -117,7 +114,7 @@ instance Produces DeleteSmsCampaign MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getSmsCampaign0 
+getSmsCampaign0
   :: CampaignId -- ^ "campaignId" -  id of the SMS campaign
   -> SendinBlueRequest GetSmsCampaign0 MimeNoContent GetSmsCampaign MimeJSON
 getSmsCampaign0 (CampaignId campaignId) =
@@ -137,7 +134,7 @@ instance Produces GetSmsCampaign0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getSmsCampaigns0 
+getSmsCampaigns0
   :: SendinBlueRequest GetSmsCampaigns0 MimeNoContent GetSmsCampaigns MimeJSON
 getSmsCampaigns0 =
   _mkRequest "GET" ["/smsCampaigns"]
@@ -183,7 +180,7 @@ instance Produces GetSmsCampaigns0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-requestSmsRecipientExport0 
+requestSmsRecipientExport0
   :: (Consumes RequestSmsRecipientExport0 MimeJSON)
   => CampaignId -- ^ "campaignId" -  id of the campaign
   -> SendinBlueRequest RequestSmsRecipientExport0 MimeJSON CreatedProcessId MimeJSON
@@ -211,18 +208,15 @@ instance Produces RequestSmsRecipientExport0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-sendSmsCampaignNow 
+sendSmsCampaignNow
   :: CampaignId -- ^ "campaignId" -  id of the campaign
-  -> SendinBlueRequest SendSmsCampaignNow MimeNoContent res MimeJSON
+  -> SendinBlueRequest SendSmsCampaignNow MimeNoContent NoContent MimeNoContent
 sendSmsCampaignNow (CampaignId campaignId) =
   _mkRequest "POST" ["/smsCampaigns/",toPath campaignId,"/sendNow"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data SendSmsCampaignNow  
--- | @application/json@
-instance Produces SendSmsCampaignNow MimeJSON
+instance Produces SendSmsCampaignNow MimeNoContent
 
 
 -- *** sendSmsReport
@@ -235,13 +229,11 @@ instance Produces SendSmsCampaignNow MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-sendSmsReport 
+sendSmsReport
   :: (Consumes SendSmsReport MimeJSON, MimeRender MimeJSON SendReport)
   => SendReport -- ^ "sendReport" -  Values for send a report
   -> CampaignId -- ^ "campaignId" -  id of the campaign
-  -> SendinBlueRequest SendSmsReport MimeJSON res MimeJSON
+  -> SendinBlueRequest SendSmsReport MimeJSON NoContent MimeNoContent
 sendSmsReport sendReport (CampaignId campaignId) =
   _mkRequest "POST" ["/smsCampaigns/",toPath campaignId,"/sendReport"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -255,8 +247,7 @@ instance HasBodyParam SendSmsReport SendReport
 -- | @application/json@
 instance Consumes SendSmsReport MimeJSON
 
--- | @application/json@
-instance Produces SendSmsReport MimeJSON
+instance Produces SendSmsReport MimeNoContent
 
 
 -- *** sendTestSms0
@@ -267,13 +258,11 @@ instance Produces SendSmsReport MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-sendTestSms0 
+sendTestSms0
   :: (Consumes SendTestSms0 MimeJSON, MimeRender MimeJSON SendTestSms)
   => SendTestSms -- ^ "phoneNumber" -  Mobile number of the recipient with the country code. This number must belong to one of your contacts in SendinBlue account and must not be blacklisted
   -> CampaignId -- ^ "campaignId" -  Id of the SMS campaign
-  -> SendinBlueRequest SendTestSms0 MimeJSON res MimeJSON
+  -> SendinBlueRequest SendTestSms0 MimeJSON NoContent MimeNoContent
 sendTestSms0 phoneNumber (CampaignId campaignId) =
   _mkRequest "POST" ["/smsCampaigns/",toPath campaignId,"/sendTest"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -287,8 +276,7 @@ instance HasBodyParam SendTestSms0 SendTestSms
 -- | @application/json@
 instance Consumes SendTestSms0 MimeJSON
 
--- | @application/json@
-instance Produces SendTestSms0 MimeJSON
+instance Produces SendTestSms0 MimeNoContent
 
 
 -- *** updateSmsCampaign0
@@ -299,13 +287,11 @@ instance Produces SendTestSms0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateSmsCampaign0 
+updateSmsCampaign0
   :: (Consumes UpdateSmsCampaign0 MimeJSON, MimeRender MimeJSON UpdateSmsCampaign)
   => UpdateSmsCampaign -- ^ "updateSmsCampaign" -  Values to update an SMS Campaign
   -> CampaignId -- ^ "campaignId" -  id of the SMS campaign
-  -> SendinBlueRequest UpdateSmsCampaign0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateSmsCampaign0 MimeJSON NoContent MimeNoContent
 updateSmsCampaign0 updateSmsCampaign (CampaignId campaignId) =
   _mkRequest "PUT" ["/smsCampaigns/",toPath campaignId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -319,8 +305,7 @@ instance HasBodyParam UpdateSmsCampaign0 UpdateSmsCampaign
 -- | @application/json@
 instance Consumes UpdateSmsCampaign0 MimeJSON
 
--- | @application/json@
-instance Produces UpdateSmsCampaign0 MimeJSON
+instance Produces UpdateSmsCampaign0 MimeNoContent
 
 
 -- *** updateSmsCampaignStatus
@@ -331,13 +316,11 @@ instance Produces UpdateSmsCampaign0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateSmsCampaignStatus 
+updateSmsCampaignStatus
   :: (Consumes UpdateSmsCampaignStatus MimeJSON, MimeRender MimeJSON UpdateCampaignStatus)
   => UpdateCampaignStatus -- ^ "status" -  Status of the campaign.
   -> CampaignId -- ^ "campaignId" -  id of the campaign
-  -> SendinBlueRequest UpdateSmsCampaignStatus MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateSmsCampaignStatus MimeJSON NoContent MimeNoContent
 updateSmsCampaignStatus status (CampaignId campaignId) =
   _mkRequest "PUT" ["/smsCampaigns/",toPath campaignId,"/status"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -351,6 +334,5 @@ instance HasBodyParam UpdateSmsCampaignStatus UpdateCampaignStatus
 -- | @application/json@
 instance Consumes UpdateSmsCampaignStatus MimeJSON
 
--- | @application/json@
-instance Produces UpdateSmsCampaignStatus MimeJSON
+instance Produces UpdateSmsCampaignStatus MimeNoContent
 

@@ -1222,6 +1222,11 @@ getCampaignStatsUniqueViewsL :: Lens_' GetCampaignStats (Integer)
 getCampaignStatsUniqueViewsL f GetCampaignStats{..} = (\getCampaignStatsUniqueViews -> GetCampaignStats { getCampaignStatsUniqueViews, ..} ) <$> f getCampaignStatsUniqueViews
 {-# INLINE getCampaignStatsUniqueViewsL #-}
 
+-- | 'getCampaignStatsTrackableViews' Lens
+getCampaignStatsTrackableViewsL :: Lens_' GetCampaignStats (Integer)
+getCampaignStatsTrackableViewsL f GetCampaignStats{..} = (\getCampaignStatsTrackableViews -> GetCampaignStats { getCampaignStatsTrackableViews, ..} ) <$> f getCampaignStatsTrackableViews
+{-# INLINE getCampaignStatsTrackableViewsL #-}
+
 -- | 'getCampaignStatsUnsubscriptions' Lens
 getCampaignStatsUnsubscriptionsL :: Lens_' GetCampaignStats (Integer)
 getCampaignStatsUnsubscriptionsL f GetCampaignStats{..} = (\getCampaignStatsUnsubscriptions -> GetCampaignStats { getCampaignStatsUnsubscriptions, ..} ) <$> f getCampaignStatsUnsubscriptions

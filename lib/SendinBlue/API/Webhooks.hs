@@ -66,7 +66,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-createWebhook0 
+createWebhook0
   :: (Consumes CreateWebhook0 MimeJSON, MimeRender MimeJSON CreateWebhook)
   => CreateWebhook -- ^ "createWebhook" -  Values to create a webhook
   -> SendinBlueRequest CreateWebhook0 MimeJSON CreateModel MimeJSON
@@ -95,18 +95,15 @@ instance Produces CreateWebhook0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteWebhook 
+deleteWebhook
   :: WebhookId -- ^ "webhookId" -  Id of the webhook
-  -> SendinBlueRequest DeleteWebhook MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteWebhook MimeNoContent NoContent MimeNoContent
 deleteWebhook (WebhookId webhookId) =
   _mkRequest "DELETE" ["/webhooks/",toPath webhookId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteWebhook  
--- | @application/json@
-instance Produces DeleteWebhook MimeJSON
+instance Produces DeleteWebhook MimeNoContent
 
 
 -- *** getWebhook0
@@ -117,7 +114,7 @@ instance Produces DeleteWebhook MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getWebhook0 
+getWebhook0
   :: WebhookId -- ^ "webhookId" -  Id of the webhook
   -> SendinBlueRequest GetWebhook0 MimeNoContent GetWebhook MimeJSON
 getWebhook0 (WebhookId webhookId) =
@@ -137,7 +134,7 @@ instance Produces GetWebhook0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getWebhooks0 
+getWebhooks0
   :: SendinBlueRequest GetWebhooks0 MimeNoContent GetWebhooks MimeJSON
 getWebhooks0 =
   _mkRequest "GET" ["/webhooks"]
@@ -166,13 +163,11 @@ instance Produces GetWebhooks0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateWebhook0 
+updateWebhook0
   :: (Consumes UpdateWebhook0 MimeJSON, MimeRender MimeJSON UpdateWebhook)
   => UpdateWebhook -- ^ "updateWebhook" -  Values to update a webhook
   -> WebhookId -- ^ "webhookId" -  Id of the webhook
-  -> SendinBlueRequest UpdateWebhook0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateWebhook0 MimeJSON NoContent MimeNoContent
 updateWebhook0 updateWebhook (WebhookId webhookId) =
   _mkRequest "PUT" ["/webhooks/",toPath webhookId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -186,6 +181,5 @@ instance HasBodyParam UpdateWebhook0 UpdateWebhook
 -- | @application/json@
 instance Consumes UpdateWebhook0 MimeJSON
 
--- | @application/json@
-instance Produces UpdateWebhook0 MimeJSON
+instance Produces UpdateWebhook0 MimeNoContent
 

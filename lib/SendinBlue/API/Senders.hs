@@ -66,7 +66,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-createSender0 
+createSender0
   :: (Consumes CreateSender0 MimeJSON)
   => SendinBlueRequest CreateSender0 MimeJSON CreateSenderModel MimeJSON
 createSender0 =
@@ -93,18 +93,15 @@ instance Produces CreateSender0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteSender 
+deleteSender
   :: SenderId -- ^ "senderId" -  Id of the sender
-  -> SendinBlueRequest DeleteSender MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteSender MimeNoContent NoContent MimeNoContent
 deleteSender (SenderId senderId) =
   _mkRequest "DELETE" ["/senders/",toPath senderId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteSender  
--- | @application/json@
-instance Produces DeleteSender MimeJSON
+instance Produces DeleteSender MimeNoContent
 
 
 -- *** getIps0
@@ -115,7 +112,7 @@ instance Produces DeleteSender MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getIps0 
+getIps0
   :: SendinBlueRequest GetIps0 MimeNoContent GetIps MimeJSON
 getIps0 =
   _mkRequest "GET" ["/senders/ips"]
@@ -134,7 +131,7 @@ instance Produces GetIps0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getIpsFromSender0 
+getIpsFromSender0
   :: SenderId -- ^ "senderId" -  Id of the sender
   -> SendinBlueRequest GetIpsFromSender0 MimeNoContent GetIpsFromSender MimeJSON
 getIpsFromSender0 (SenderId senderId) =
@@ -154,7 +151,7 @@ instance Produces GetIpsFromSender0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getSenders 
+getSenders
   :: SendinBlueRequest GetSenders MimeNoContent GetSendersList MimeJSON
 getSenders =
   _mkRequest "GET" ["/senders"]
@@ -183,12 +180,10 @@ instance Produces GetSenders MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateSender0 
+updateSender0
   :: (Consumes UpdateSender0 MimeJSON)
   => SenderId -- ^ "senderId" -  Id of the sender
-  -> SendinBlueRequest UpdateSender0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateSender0 MimeJSON NoContent MimeNoContent
 updateSender0 (SenderId senderId) =
   _mkRequest "PUT" ["/senders/",toPath senderId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -201,6 +196,5 @@ instance HasBodyParam UpdateSender0 UpdateSender
 -- | @application/json@
 instance Consumes UpdateSender0 MimeJSON
 
--- | @application/json@
-instance Produces UpdateSender0 MimeJSON
+instance Produces UpdateSender0 MimeNoContent
 

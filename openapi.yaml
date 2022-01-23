@@ -141,6 +141,7 @@ paths:
                       softBounces: 100
                       hardBounces: 87
                       uniqueViews: 7779
+                      trackableViews: 5661
                       unsubscriptions: 2
                       viewed: 8999
                     campaignStats:
@@ -153,6 +154,7 @@ paths:
                       softBounces: 100
                       hardBounces: 87
                       uniqueViews: 7779
+                      trackableViews: 5661
                       unsubscriptions: 2
                       viewed: 8999
                       deferred: 30
@@ -221,6 +223,7 @@ paths:
                       softBounces: 100
                       hardBounces: 87
                       uniqueViews: 7779
+                      trackableViews: 5661
                       unsubscriptions: 2
                       viewed: 8999
                     campaignStats:
@@ -233,6 +236,7 @@ paths:
                       softBounces: 100
                       hardBounces: 87
                       uniqueViews: 7779
+                      trackableViews: 5661
                       unsubscriptions: 2
                       viewed: 8999
                       deferred: 30
@@ -390,6 +394,7 @@ paths:
                     softBounces: 100
                     hardBounces: 87
                     uniqueViews: 7779
+                    trackableViews: 5661
                     unsubscriptions: 2
                     viewed: 8999
                   campaignStats:
@@ -402,6 +407,7 @@ paths:
                     softBounces: 100
                     hardBounces: 87
                     uniqueViews: 7779
+                    trackableViews: 5661
                     unsubscriptions: 2
                     viewed: 8999
                     deferred: 30
@@ -6977,6 +6983,12 @@ components:
           example: 7779
           format: int64
           type: integer
+        trackableViews:
+          description: Recipients without any privacy protection option enabled in
+            their email client
+          example: 5661
+          format: int64
+          type: integer
         unsubscriptions:
           description: Number of unsubscription for the campaign
           example: 2
@@ -7005,6 +7017,7 @@ components:
       - hardBounces
       - sent
       - softBounces
+      - trackableViews
       - uniqueClicks
       - uniqueViews
       - unsubscriptions
@@ -7736,10 +7749,12 @@ components:
             used for sending transactional emails. Headers are allowed in `This-Case-Only`
             (i.e. words separated by hyphen with first letter of each word in capital
             letter), they will be converted to such case styling if not in this format
-            in the request payload. For example, `{"sender.ip":"1.2.3.4", "X-Mailin-custom":"some_custom_header"}`.
+            in the request payload. For example, `{"sender.ip":"1.2.3.4", "X-Mailin-custom":"some_custom_header",
+            "idempotencyKey":"abc-123"}`.
           example:
             sender.ip: 1.2.3.4
             X-Mailin-custom: some_custom_header
+            idempotencyKey: abc-123
           properties: {}
           type: object
         templateId:

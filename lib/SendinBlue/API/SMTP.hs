@@ -68,12 +68,10 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-blockNewDomain 
+blockNewDomain
   :: (Consumes BlockNewDomain MimeJSON, MimeRender MimeJSON BlockDomain)
   => BlockDomain -- ^ "blockDomain"
-  -> SendinBlueRequest BlockNewDomain MimeJSON res MimeJSON
+  -> SendinBlueRequest BlockNewDomain MimeJSON NoContent MimeNoContent
 blockNewDomain blockDomain =
   _mkRequest "POST" ["/smtp/blockedDomains"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -85,8 +83,7 @@ instance HasBodyParam BlockNewDomain BlockDomain
 -- | @application/json@
 instance Consumes BlockNewDomain MimeJSON
 
--- | @application/json@
-instance Produces BlockNewDomain MimeJSON
+instance Produces BlockNewDomain MimeNoContent
 
 
 -- *** createSmtpTemplate0
@@ -97,7 +94,7 @@ instance Produces BlockNewDomain MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-createSmtpTemplate0 
+createSmtpTemplate0
   :: (Consumes CreateSmtpTemplate0 MimeJSON, MimeRender MimeJSON CreateSmtpTemplate)
   => CreateSmtpTemplate -- ^ "smtpTemplate" -  values to update in transactional email template
   -> SendinBlueRequest CreateSmtpTemplate0 MimeJSON CreateModel MimeJSON
@@ -128,18 +125,15 @@ instance Produces CreateSmtpTemplate0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteBlockedDomain 
+deleteBlockedDomain
   :: Domain -- ^ "domain" -  The name of the domain to be deleted
-  -> SendinBlueRequest DeleteBlockedDomain MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteBlockedDomain MimeNoContent NoContent MimeNoContent
 deleteBlockedDomain (Domain domain) =
   _mkRequest "DELETE" ["/smtp/blockedDomains/",toPath domain]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteBlockedDomain  
--- | @application/json@
-instance Produces DeleteBlockedDomain MimeJSON
+instance Produces DeleteBlockedDomain MimeNoContent
 
 
 -- *** deleteHardbounces0
@@ -152,11 +146,9 @@ instance Produces DeleteBlockedDomain MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteHardbounces0 
+deleteHardbounces0
   :: (Consumes DeleteHardbounces0 MimeJSON)
-  => SendinBlueRequest DeleteHardbounces0 MimeJSON res MimeJSON
+  => SendinBlueRequest DeleteHardbounces0 MimeJSON NoContent MimeNoContent
 deleteHardbounces0 =
   _mkRequest "POST" ["/smtp/deleteHardbounces"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -169,8 +161,7 @@ instance HasBodyParam DeleteHardbounces0 DeleteHardbounces
 -- | @application/json@
 instance Consumes DeleteHardbounces0 MimeJSON
 
--- | @application/json@
-instance Produces DeleteHardbounces0 MimeJSON
+instance Produces DeleteHardbounces0 MimeNoContent
 
 
 -- *** deleteSmtpTemplate
@@ -181,18 +172,15 @@ instance Produces DeleteHardbounces0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-deleteSmtpTemplate 
+deleteSmtpTemplate
   :: TemplateId -- ^ "templateId" -  id of the template
-  -> SendinBlueRequest DeleteSmtpTemplate MimeNoContent res MimeJSON
+  -> SendinBlueRequest DeleteSmtpTemplate MimeNoContent NoContent MimeNoContent
 deleteSmtpTemplate (TemplateId templateId) =
   _mkRequest "DELETE" ["/smtp/templates/",toPath templateId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data DeleteSmtpTemplate  
--- | @application/json@
-instance Produces DeleteSmtpTemplate MimeJSON
+instance Produces DeleteSmtpTemplate MimeNoContent
 
 
 -- *** getAggregatedSmtpReport
@@ -203,7 +191,7 @@ instance Produces DeleteSmtpTemplate MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getAggregatedSmtpReport 
+getAggregatedSmtpReport
   :: SendinBlueRequest GetAggregatedSmtpReport MimeNoContent GetAggregatedReport MimeJSON
 getAggregatedSmtpReport =
   _mkRequest "GET" ["/smtp/statistics/aggregatedReport"]
@@ -244,7 +232,7 @@ instance Produces GetAggregatedSmtpReport MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getBlockedDomains0 
+getBlockedDomains0
   :: SendinBlueRequest GetBlockedDomains0 MimeNoContent GetBlockedDomains MimeJSON
 getBlockedDomains0 =
   _mkRequest "GET" ["/smtp/blockedDomains"]
@@ -263,7 +251,7 @@ instance Produces GetBlockedDomains0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getEmailEventReport0 
+getEmailEventReport0
   :: SendinBlueRequest GetEmailEventReport0 MimeNoContent GetEmailEventReport MimeJSON
 getEmailEventReport0 =
   _mkRequest "GET" ["/smtp/statistics/events"]
@@ -332,7 +320,7 @@ instance Produces GetEmailEventReport0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getSmtpReport 
+getSmtpReport
   :: SendinBlueRequest GetSmtpReport MimeNoContent GetReports MimeJSON
 getSmtpReport =
   _mkRequest "GET" ["/smtp/statistics/reports"]
@@ -381,7 +369,7 @@ instance Produces GetSmtpReport MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getSmtpTemplate 
+getSmtpTemplate
   :: TemplateId -- ^ "templateId" -  id of the template
   -> SendinBlueRequest GetSmtpTemplate MimeNoContent GetSmtpTemplateOverview MimeJSON
 getSmtpTemplate (TemplateId templateId) =
@@ -401,7 +389,7 @@ instance Produces GetSmtpTemplate MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getSmtpTemplates0 
+getSmtpTemplates0
   :: SendinBlueRequest GetSmtpTemplates0 MimeNoContent GetSmtpTemplates MimeJSON
 getSmtpTemplates0 =
   _mkRequest "GET" ["/smtp/templates"]
@@ -435,7 +423,7 @@ instance Produces GetSmtpTemplates0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getTransacBlockedContacts0 
+getTransacBlockedContacts0
   :: SendinBlueRequest GetTransacBlockedContacts0 MimeNoContent GetTransacBlockedContacts MimeJSON
 getTransacBlockedContacts0 =
   _mkRequest "GET" ["/smtp/blockedContacts"]
@@ -479,7 +467,7 @@ instance Produces GetTransacBlockedContacts0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getTransacEmailContent0 
+getTransacEmailContent0
   :: Uuid -- ^ "uuid" -  Unique id of the transactional email that has been sent to a particular contact
   -> SendinBlueRequest GetTransacEmailContent0 MimeNoContent GetTransacEmailContent MimeJSON
 getTransacEmailContent0 (Uuid uuid) =
@@ -501,7 +489,7 @@ instance Produces GetTransacEmailContent0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-getTransacEmailsList0 
+getTransacEmailsList0
   :: SendinBlueRequest GetTransacEmailsList0 MimeNoContent GetTransacEmailsList MimeJSON
 getTransacEmailsList0 =
   _mkRequest "GET" ["/smtp/emails"]
@@ -547,7 +535,7 @@ instance Produces GetTransacEmailsList0 MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-sendTemplate 
+sendTemplate
   :: (Consumes SendTemplate MimeJSON, MimeRender MimeJSON SendEmail)
   => SendEmail -- ^ "sendEmail"
   -> TemplateId -- ^ "templateId" -  Id of the template
@@ -577,13 +565,11 @@ instance Produces SendTemplate MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-sendTestTemplate 
+sendTestTemplate
   :: (Consumes SendTestTemplate MimeJSON, MimeRender MimeJSON SendTestEmail)
   => SendTestEmail -- ^ "sendTestEmail"
   -> TemplateId -- ^ "templateId" -  Id of the template
-  -> SendinBlueRequest SendTestTemplate MimeJSON res MimeJSON
+  -> SendinBlueRequest SendTestTemplate MimeJSON NoContent MimeNoContent
 sendTestTemplate sendTestEmail (TemplateId templateId) =
   _mkRequest "POST" ["/smtp/templates/",toPath templateId,"/sendTest"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -595,8 +581,7 @@ instance HasBodyParam SendTestTemplate SendTestEmail
 -- | @application/json@
 instance Consumes SendTestTemplate MimeJSON
 
--- | @application/json@
-instance Produces SendTestTemplate MimeJSON
+instance Produces SendTestTemplate MimeNoContent
 
 
 -- *** sendTransacEmail
@@ -607,7 +592,7 @@ instance Produces SendTestTemplate MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
-sendTransacEmail 
+sendTransacEmail
   :: (Consumes SendTransacEmail MimeJSON, MimeRender MimeJSON SendSmtpEmail)
   => SendSmtpEmail -- ^ "sendSmtpEmail" -  Values to send a transactional email
   -> SendinBlueRequest SendTransacEmail MimeJSON CreateSmtpEmail MimeJSON
@@ -636,18 +621,15 @@ instance Produces SendTransacEmail MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-smtpBlockedContactsEmailDelete 
+smtpBlockedContactsEmailDelete
   :: Email -- ^ "email" -  contact email (urlencoded) to unblock.
-  -> SendinBlueRequest SmtpBlockedContactsEmailDelete MimeNoContent res MimeJSON
+  -> SendinBlueRequest SmtpBlockedContactsEmailDelete MimeNoContent NoContent MimeNoContent
 smtpBlockedContactsEmailDelete (Email email) =
   _mkRequest "DELETE" ["/smtp/blockedContacts/",toPath email]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data SmtpBlockedContactsEmailDelete  
--- | @application/json@
-instance Produces SmtpBlockedContactsEmailDelete MimeJSON
+instance Produces SmtpBlockedContactsEmailDelete MimeNoContent
 
 
 -- *** smtpLogMessageIdDelete
@@ -658,18 +640,15 @@ instance Produces SmtpBlockedContactsEmailDelete MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-smtpLogMessageIdDelete 
+smtpLogMessageIdDelete
   :: MessageId -- ^ "messageId" -  MessageId of the transactional log to delete
-  -> SendinBlueRequest SmtpLogMessageIdDelete MimeNoContent res MimeJSON
+  -> SendinBlueRequest SmtpLogMessageIdDelete MimeNoContent NoContent MimeNoContent
 smtpLogMessageIdDelete (MessageId messageId) =
   _mkRequest "DELETE" ["/smtp/log/",toPath messageId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
 
 data SmtpLogMessageIdDelete  
--- | @application/json@
-instance Produces SmtpLogMessageIdDelete MimeJSON
+instance Produces SmtpLogMessageIdDelete MimeNoContent
 
 
 -- *** updateSmtpTemplate0
@@ -680,13 +659,11 @@ instance Produces SmtpLogMessageIdDelete MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyApiKey'
 -- 
--- Note: Has 'Produces' instances, but no response schema
--- 
-updateSmtpTemplate0 
+updateSmtpTemplate0
   :: (Consumes UpdateSmtpTemplate0 MimeJSON, MimeRender MimeJSON UpdateSmtpTemplate)
   => UpdateSmtpTemplate -- ^ "smtpTemplate" -  values to update in transactional email template
   -> TemplateId -- ^ "templateId" -  id of the template
-  -> SendinBlueRequest UpdateSmtpTemplate0 MimeJSON res MimeJSON
+  -> SendinBlueRequest UpdateSmtpTemplate0 MimeJSON NoContent MimeNoContent
 updateSmtpTemplate0 smtpTemplate (TemplateId templateId) =
   _mkRequest "PUT" ["/smtp/templates/",toPath templateId]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
@@ -700,6 +677,5 @@ instance HasBodyParam UpdateSmtpTemplate0 UpdateSmtpTemplate
 -- | @application/json@
 instance Consumes UpdateSmtpTemplate0 MimeJSON
 
--- | @application/json@
-instance Produces UpdateSmtpTemplate0 MimeJSON
+instance Produces UpdateSmtpTemplate0 MimeNoContent
 
