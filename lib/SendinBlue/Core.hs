@@ -80,7 +80,7 @@ data SendinBlueConfig = SendinBlueConfig
   , configLogContext :: LogContext -- ^ Configures the logger
   , configAuthMethods :: [AnyAuthMethod] -- ^ List of configured auth methods
   , configValidateAuthMethods :: Bool -- ^ throw exceptions if auth methods are not configured
-  , configQueryExtraUnreserved :: B.ByteString -- ^ Configures additional querystring characters which must not be URI encoded, e.g. '+' or ':' 
+  , configQueryExtraUnreserved :: B.ByteString -- ^ Configures additional querystring characters which must not be URI encoded, e.g. '+' or ':'
   }
 
 -- | display the config
@@ -99,14 +99,14 @@ instance P.Show SendinBlueConfig where
 --
 -- configUserAgent:
 --
--- @"sendinblue/0.1.0.0"@
+-- @"sendinblue/0.1.2.0"@
 --
 newConfig :: IO SendinBlueConfig
 newConfig = do
     logCxt <- initLogContext
     return $ SendinBlueConfig
         { configHost = "https://api.sendinblue.com/v3"
-        , configUserAgent = "sendinblue/0.1.0.0"
+        , configUserAgent = "sendinblue/0.1.2.0"
         , configLogExecWithContext = runDefaultLogExecWithContext
         , configLogContext = logCxt
         , configAuthMethods = []
@@ -429,7 +429,7 @@ _applyAuthMethods req config@(SendinBlueConfig {configAuthMethods = as}) =
 -- * Utils
 
 -- | Removes Null fields.  (OpenAPI-Specification 2.0 does not allow Null in JSON)
-_omitNulls :: [(Text, A.Value)] -> A.Value
+_omitNulls :: [(A.Key, A.Value)] -> A.Value
 _omitNulls = A.object . P.filter notNull
   where
     notNull (_, A.Null) = False
